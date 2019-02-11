@@ -7,7 +7,6 @@ import scipy.ndimage as spimg
 import cvxpy as cvx
 import imageio as im
 
-
 def dct2(x):
     return spfft.dct(spfft.dct(x.T, norm='ortho', axis=0))
 
@@ -17,9 +16,9 @@ def idct2(x):
 def rgb_to_gray(image):
     return np.dot(image[...,:3], [0.299, 0.587, 0.144])
 
-Xorig = im.imread('download.jpeg')
+Xorig = im.imread('escher_waterfall.jpeg')
 print(rgb_to_gray(Xorig).shape)
-X = spimg.zoom(rgb_to_gray(Xorig), 0.2)
+X = spimg.zoom(rgb_to_gray(Xorig), 0.1)
 ny,nx = X.shape
 
 k = round(nx * ny * 0.5) # 50% sample
@@ -53,13 +52,13 @@ Xm.T.flat[ri] = X.T.flat[ri]
 plt.imshow(Xorig)
 plt.show()
 
-plt.imshow(X, cmap='gray')
+plt.imshow(X)
 plt.show()
 
-plt.imshow(Xm, cmap='gray')
+plt.imshow(Xa.T)
 plt.show()
 
-plt.imshow(Xa.T, cmap='gray')
+plt.imshow(Xm)
 plt.show()
 
 '''
